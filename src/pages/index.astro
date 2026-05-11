@@ -1,15 +1,41 @@
 ---
----
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+import { getCollection } from 'astro:content';
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Portfolio</title>
-  </head>
-  <body>
-    <h1>Portfolio</h1>
-  </body>
-</html>
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="首页">
+  <h1 class="page-title">作品集</h1>
+  <div class="projects-list">
+    {sortedProjects.map((project, index) => (
+      <ScrollReveal delay={index * 100}>
+        <ProjectCard
+          title={project.data.title}
+          slug={project.id}
+          cover={project.data.cover}
+          tools={project.data.tools}
+          description={project.data.description}
+        />
+      </ScrollReveal>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: var(--color-text);
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+  }
+</style>
