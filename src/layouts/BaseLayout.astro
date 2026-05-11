@@ -1,0 +1,93 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Sidebar from '../components/Sidebar.astro';
+import BackgroundPattern from '../components/BackgroundPattern.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | Game Artist Portfolio</title>
+  <ViewTransitions />
+</head>
+<body>
+  <BackgroundPattern />
+  <Sidebar />
+  <main class="main-content" transition:animate="fade">
+    <slot />
+  </main>
+  <button class="mobile-menu-btn" aria-label="打开菜单">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <script>
+    function setupMobileMenu() {
+      const btn = document.querySelector('.mobile-menu-btn');
+      const sidebar = document.querySelector('.sidebar');
+      if (!btn || !sidebar) return;
+      btn.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+      sidebar.querySelectorAll('.sidebar-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          sidebar.classList.remove('open');
+        });
+      });
+    }
+    setupMobileMenu();
+    document.addEventListener('astro:after-swap', setupMobileMenu);
+  </script>
+</body>
+</html>
+
+<style>
+  .main-content {
+    margin-left: var(--sidebar-width);
+    padding: 3rem 4rem;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 200;
+    background: var(--color-sidebar-bg);
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    padding: 0.6rem;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+      padding: 2rem 1.5rem;
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+    }
+  }
+</style>
