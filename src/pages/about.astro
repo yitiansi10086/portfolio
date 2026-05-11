@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="关于我">
+  <article class="about-page">
+    <h1 class="page-title">关于我</h1>
+
+    <section class="about-intro">
+      <p>你好，我是一名刚毕业的游戏美术师，专注于 3D 建模、游戏场景制作和 3D 扫描。</p>
+      <p>我热爱用数字工具创造沉浸式的视觉体验，擅长将概念设计转化为高质量的游戏资产。</p>
+    </section>
+
+    <section class="about-contact">
+      <h2>联系方式</h2>
+      <ul class="contact-list">
+        <li>邮箱：<a href="mailto:your@email.com">your@email.com</a></li>
+        <li>ArtStation：<a href="#">artstation.com/yourname</a></li>
+      </ul>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-page {
+    max-width: 600px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .about-intro {
+    margin-bottom: 2.5rem;
+  }
+
+  .about-intro p {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+
+  .about-contact h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .contact-list li {
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-list a {
+    color: var(--color-primary);
+  }
+</style>
