@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
+const currentPath = Astro.url.pathname;
+---
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <a href="/" class="sidebar-logo">Portfolio</a>
+  </div>
+  <ul class="sidebar-nav">
+    {sortedProjects.map((project) => (
+      <li>
+        <a
+          href={`/projects/${project.id}`}
+          class:list={[
+            'sidebar-link',
+            { active: currentPath === `/projects/${project.id}` || currentPath === `/projects/${project.id}/` }
+          ]}
+        >
+          {project.data.title}
+        </a>
+      </li>
+    ))}
+    <li class="sidebar-divider"></li>
+    <li>
+      <a
+        href="/about"
+        class:list={['sidebar-link', { active: currentPath === '/about' || currentPath === '/about/' }]}
+      >
+        关于我
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--color-sidebar-bg);
+    border-right: 1px solid var(--color-card-border);
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  .sidebar-header {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid var(--color-card-border);
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .sidebar-nav {
+    list-style: none;
+    padding: 0 0.75rem;
+  }
+
+  .sidebar-nav li {
+    margin-bottom: 0.25rem;
+  }
+
+  .sidebar-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    transition: color 0.2s, background 0.2s, border-left-color 0.3s;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar-link:hover {
+    color: var(--color-text);
+    background: rgba(255, 106, 0, 0.05);
+  }
+
+  .sidebar-link.active {
+    color: var(--color-primary);
+    background: rgba(255, 106, 0, 0.08);
+    border-left-color: var(--color-primary);
+  }
+
+  .sidebar-divider {
+    height: 1px;
+    background: var(--color-card-border);
+    margin: 0.75rem 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+  }
+</style>
