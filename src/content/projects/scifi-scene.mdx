@@ -1,0 +1,53 @@
+---
+title: "写实科幻场景"
+cover: "/images/写实封面.png"
+tools: ["Unreal Engine 5", "Maya", "Substance Painter", "RealityCapture", "Quixel Bridge", "After Effects"]
+description: "写实末日科幻场景，使用光线追踪 + Nanite 渲染，包含水面反射处理和 AE 雨滴后期。"
+order: 4
+---
+
+import ImageSequence from '../../components/ImageSequence.astro';
+
+## 项目简介
+
+以《最后生还者》为灵感，制作大型写实末日场景。首次尝试写实风格的大规模场景制作，使用光线追踪实现全局光照和反射效果。
+
+## 制作过程
+
+**光照方案** — 选择光线追踪（Ray Tracing）实现 GI 和反射，放弃 Lumen（仅支持 200m 范围反射，不适合大场景）。使用 Nanite 自动 LOD 降低光追性能开销，但需处理光追下的阴影 Bug。
+
+**水面反射** — 场景遮挡和雾气导致水面过暗，通过在水面附近放置不可见的 HDR 天空贴图平面模拟自然光照。对于无法正确反射的物体，复制模型放置在水面附近并设为不可见，确保反射准确。
+
+**后期处理** — 在 UE5 Level Sequence 中 K 帧完成动画，导出后用 AE 添加雨滴效果。
+
+## 场景展示
+
+<ImageSequence
+  images={[
+    "/images/写实1.png",
+    "/images/写实2.png",
+    "/images/写实3.png",
+    "/images/写实4.png",
+    "/images/写实5.png",
+    "/images/写实6.png",
+    "/images/写实7.png",
+    "/images/写实8.png",
+    "/images/写实9.png",
+    "/images/写实10.png",
+    "/images/写实11.png",
+    "/images/写实12.png",
+    "/images/写实13.png",
+    "/images/写实14.png",
+    "/images/写实15.png",
+    "/images/写实16.png",
+    "/images/写实17.png",
+    "/images/写实18.png",
+    "/images/写实19.png",
+    "/images/写实20.png",
+    "/images/写实21.png",
+    "/images/写实22.png",
+    "/images/写实23.png",
+  ]}
+  fps={1}
+  alt="写实科幻场景序列"
+/>

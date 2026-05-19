@@ -2,3 +2,19 @@ node_modules
 dist
 .astro
 .superpowers
+.claude
+
+# PDF reports
+*.pdf
+
+# Temp output files
+output.txt
+advanced_output.txt
+research_output.txt
+
+# Agents
+.agents/
+
+# Docs (local only)
+docs/
+1/
