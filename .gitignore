@@ -23,3 +23,6 @@ docs/
 upload-cos.cjs
 .netlify/
 skills-lock.json
+
+# Large media hosted on COS instead of bundled
+public/images/视频.mp4

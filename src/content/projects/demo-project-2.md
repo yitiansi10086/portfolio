@@ -7,7 +7,7 @@ order: 2
 ---
 
 <video controls width="100%" style="border-radius:12px;border:1px solid rgba(255,255,255,0.06);margin-bottom:2rem;">
-  <source src="/images/视频.mp4" type="video/mp4">
+  <source src="https://portfolio-1435175700.cos.ap-shanghai.myqcloud.com/images/视频.mp4" type="video/mp4">
 </video>
 
 ## 制作过程
