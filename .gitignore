@@ -18,3 +18,8 @@ research_output.txt
 # Docs (local only)
 docs/
 1/
+
+# Local-only files with secrets / build artifacts from other platforms
+upload-cos.cjs
+.netlify/
+skills-lock.json
